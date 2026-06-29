@@ -1,17 +1,695 @@
 ---
+const products = [
+  {
+    name: "Calyx.",
+    type: "AI support layer",
+    shape: "square",
+    text:
+      "When your chatbot stalls, Calyx steps in. It detects failure points, takes over weak conversations, and keeps leads moving.",
+    link: "View Calyx",
+  },
+  {
+    name: "SiteForge.",
+    type: "Managed websites",
+    shape: "circle",
+    text:
+      "Fast, managed websites for Danish businesses. Strategy, build, launch, and upkeep — handled as one system.",
+    link: "View SiteForge",
+  },
+  {
+    name: "AEVUM Care.",
+    type: "Mac care suite",
+    shape: "pill",
+    text:
+      "The friendly umbrella for Mac care. Scan, cleanup, optimize, monitor, and access Shield protection without turning system safety into black-box scareware.",
+    link: "View Care",
+  },
+  {
+	name: "AEVUM Shield.",
+    type: "Mac lockdown utility",
+    shape: "shield",
+    text:
+      "SSA — Silent Shield Agent. Lock down sketchy Wi‑Fi, get notified when microphone or webcam is in use, scan local exposure, verify firewall state, and see what is open before you act.",
+    link: "View Shield",
+  },
+  {
+    name: "AEVUM Monitor.",
+    type: "Mac health view",
+    shape: "ring",
+    text:
+      "The system-stats companion for AEVUM Care. Machine health, resource usage, uptime, and status signals — more iStat Menus than fake cleaner app.",
+    link: "View Monitor",
+  },
+  {
+    name: "AevumOS.",
+    type: "Company command layer",
+    shape: "triangle",
+    text:
+      "The internal operating system behind AevumEU. Ideas, builds, launches, operations, marketing, and growth — wired into one command layer.",
+    link: "View system",
+  },
+];
 
+const basePath = import.meta.env.BASE_URL.endsWith("/")
+  ? import.meta.env.BASE_URL
+  : `${import.meta.env.BASE_URL}/`;
+const signatureSrc = `${basePath}brand/signature.png`;
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>AevumEU — Aevum Novum. Software for a smarter age.</title>
+    <meta
+      name="description"
+      content="AevumEU builds products, Mac care tools, and the internal operating system behind them."
+    />
+    <meta name="robots" content="noindex, nofollow, noarchive" />
+  </head>
+
+  <body>
+    <div class="cursor-mist" aria-hidden="true"></div>
+    <div class="ambient-mist" aria-hidden="true"></div>
+
+    <main class="site-shell">
+      <header class="nav">
+        <a class="brand" href="#top" aria-label="AevumEU home">
+          <span class="mark" aria-hidden="true">
+            <span></span><span></span><span></span>
+          </span>
+          AevumEU
+        </a>
+
+        <nav aria-label="Primary navigation">
+          <a href="#products">Products</a>
+          <a href="#system">AevumOS</a>
+          <a href="#philosophy">Philosophy</a>
+        </nav>
+
+        <a class="contact" href="mailto:hello@aevum.eu">Contact</a>
+      </header>
+
+      <section id="top" class="hero reveal-zone is-visible">
+        
+        <h1>AevumEU</h1>
+        <p class="eyebrow"> A software Company.</p>
+        <p class="lead">Aevum Novum.</p> 
+        <p class="sublead">Software for a smarter age.</p>
+        <a href="#products" class="button">View products</a>
+      </section>
+
+      <div class="mist-divider" aria-hidden="true"></div>
+
+      <section class="intro reveal-zone">
+        <h2>AevumEU builds products for real machines, real workflows, and real operators.</h2>
+        <p>From Calyx to AEVUM Care, Shield, and Monitor — every product is built to be inspectable, useful, and shipped.</p>
+      </section>
+
+      <section id="products" class="products" aria-label="AevumEU product showcase">
+        {products.map((product, index) => (
+          <article class="product-card reveal-zone" style={`--delay: ${index * 70}ms`}>
+            <div class={`shape ${product.shape}`} aria-hidden="true"></div>
+            <p class="product-type">{product.type}</p>
+            <h3>{product.name}</h3>
+            <p>{product.text}</p>
+            <a href={product.name === "AevumOS." ? "#system" : "#products"}>{product.link}</a>
+          </article>
+        ))}
+      </section>
+
+      <section class="security-note reveal-zone">
+        <div>
+          <p class="eyebrow">AEVUM Security</p>
+          <h2>SSA is the engine. Shield is the name.</h2>
+          <p>
+            Silent Shield Agent is the native macOS security utility underneath AEVUM Shield:
+            Public Shield, Exposure Scan, Panic Airgap, Verify, logs, and local exposure checks.
+            The serious parts need proper Apple Developer signing, hardened runtime, notarization,
+            and privileged helper work before release.
+          </p>
+        </div>
+      </section>
+
+      <div class="mist-divider" aria-hidden="true"></div>
+
+      <section id="system" class="system reveal-zone">
+        <div>
+          <p class="eyebrow">AevumOS</p>
+          <h2>The internal system behind AevumEU.</h2>
+          <p>
+            AevumOS is the internal command layer that turns ideas into products, products into launches,
+            and launches into operations that can be repeated, measured, and improved.
+            It is the machine behind AevumEU, not the customer-facing Mac app.
+          </p>
+          <span>Internal system · Product engine · Not public yet</span>
+        </div>
+      </section>
+
+      <section id="philosophy" class="philosophy reveal-zone">
+        <p class="eyebrow">Aevum Philosophy</p>
+        <h2>AevumEU is not an agency.</h2>
+        <p>Build, don’t pitch.<br />Inspect, don’t scare.<br />Lock down, don’t pretend.<br />Ship, don’t stall.<br />Systems, not pages.</p>
+
+        <div class="founder-signature" aria-label="AEU signature mark">
+          <img src={signatureSrc} alt="AEU signature" />
+        </div>
+      </section>
+
+      <section class="cta reveal-zone">
+        <h2>If you need something that works.</h2>
+        <p>Talk to us.</p>
+        <a href="mailto:aevum-eu@proton.me" class="button">Email AevumEU</a>
+      </section>
+    </main>
+
+    <script>
+      const mist = document.querySelector(".cursor-mist");
+      let mouseX = window.innerWidth / 2;
+      let mouseY = window.innerHeight / 2;
+      let mistX = mouseX;
+      let mistY = mouseY;
+
+      const canMoveMist = window.matchMedia("(pointer: fine)").matches;
+      const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      if (mist && canMoveMist && !reducedMotion) {
+        window.addEventListener("pointermove", (event) => {
+          mouseX = event.clientX;
+          mouseY = event.clientY;
+          mist.classList.add("is-active");
+        });
+
+        const animateMist = () => {
+          mistX += (mouseX - mistX) * 0.09;
+          mistY += (mouseY - mistY) * 0.09;
+          mist.style.setProperty("--x", `${mistX}px`);
+          mist.style.setProperty("--y", `${mistY}px`);
+          requestAnimationFrame(animateMist);
+        };
+
+        animateMist();
+      }
+
+      const revealItems = document.querySelectorAll(".reveal-zone");
+
+      const revealObserver = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+            } else {
+              entry.target.classList.remove("is-visible");
+            }
+          });
+        },
+        {
+          threshold: 0.28,
+          rootMargin: "-8% 0px -12% 0px",
+        }
+      );
+
+      revealItems.forEach((item) => revealObserver.observe(item));
+    </script>
+  </body>
 </html>
+
+<style>
+  :global(*) {
+    box-sizing: border-box;
+  }
+
+  :global(html) {
+    scroll-behavior: smooth;
+  }
+
+  :global(body) {
+    margin: 0;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background:
+      radial-gradient(circle at 50% 4%, rgba(143, 255, 210, 0.12), transparent 30rem),
+      #fff;
+    color: #050505;
+  }
+
+  .cursor-mist {
+    --x: 50vw;
+    --y: 50vh;
+    position: fixed;
+    z-index: 2;
+    left: 0;
+    top: 0;
+    width: 420px;
+    height: 420px;
+    transform: translate3d(calc(var(--x) - 50%), calc(var(--y) - 50%), 0);
+    pointer-events: none;
+    opacity: 0;
+    mix-blend-mode: multiply;
+    background:
+      radial-gradient(circle at 45% 45%, rgba(143, 255, 210, 0.24), transparent 36%),
+      radial-gradient(circle at 58% 56%, rgba(143, 255, 210, 0.12), transparent 48%);
+    filter: blur(34px);
+    transition: opacity 0.45s ease;
+  }
+
+  .cursor-mist.is-active {
+    opacity: 0.72;
+  }
+
+  .ambient-mist {
+    position: fixed;
+    inset: auto -15vw 5vh auto;
+    z-index: 1;
+    width: 44vw;
+    height: 44vw;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(143, 255, 210, 0.11), transparent 62%);
+    filter: blur(44px);
+    opacity: 0.65;
+    animation: ambientDrift 14s ease-in-out infinite alternate;
+  }
+
+  .site-shell {
+    position: relative;
+    z-index: 3;
+    min-height: 100vh;
+    padding: 22px;
+    overflow: hidden;
+  }
+
+  .nav {
+    position: sticky;
+    top: 22px;
+    z-index: 20;
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 12px 14px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.84);
+    backdrop-filter: blur(18px);
+    box-shadow: 0 20px 70px rgba(0, 0, 0, 0.035);
+  }
+
+  .brand,
+  .contact,
+  nav a,
+  .button,
+  .product-card a {
+    color: #050505;
+    text-decoration: none;
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+  }
+
+  .mark {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+  }
+
+  .mark span {
+    width: 9px;
+    height: 9px;
+    background: #050505;
+    display: block;
+  }
+
+  .mark span:nth-child(2) {
+    border-radius: 999px;
+  }
+
+  .mark span:nth-child(3) {
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+    background: #8fffd2;
+    filter: drop-shadow(0 0 8px rgba(143, 255, 210, 0.8));
+  }
+
+  nav {
+    display: flex;
+    gap: 24px;
+    font-size: 14px;
+  }
+
+  nav a {
+    color: #777;
+    transition: color 0.2s ease;
+  }
+
+  nav a:hover {
+    color: #050505;
+  }
+
+  .contact {
+    padding: 9px 14px;
+    border-radius: 999px;
+    background: #050505;
+    color: white;
+    font-size: 14px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .contact:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 0 0 4px rgba(143, 255, 210, 0.22);
+  }
+
+  .hero {
+    min-height: 72vh;
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: 76px 0 64px;
+  }
+
+  .hero h1 {
+    margin: 0;
+    font-size: clamp(76px, 14vw, 190px);
+    line-height: 0.86;
+    letter-spacing: -0.095em;
+  }
+
+  .lead {
+
+  margin: 28px 0 0;
+
+  font-size: clamp(17px, 2vw, 21px);
+
+}
+
+.sublead {
+  margin: 2px 0 0;
+  font-size: clamp(16px, 2vw, 18px);
+  color: #8c8c8c;
+}
+
+  .hero p,
+  .intro p,
+  .system p,
+  .security-note p,
+  .philosophy p,
+  .cta p,
+  .product-card p {
+    color: #8c8c8c;
+  }
+
+  .eyebrow,
+  .product-type {
+    color: #050505 !important;
+    font-size: 12px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .button {
+    display: inline-flex;
+    margin-top: 24px;
+    padding: 13px 20px;
+    border-radius: 999px;
+    background: #050505;
+    color: white;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 0 4px rgba(143, 255, 210, 0.22), 0 18px 50px rgba(0, 0, 0, 0.11);
+  }
+
+  .mist-divider {
+    position: relative;
+    max-width: 960px;
+    height: 1px;
+    margin: 16px auto;
+    background: linear-gradient(90deg, transparent, rgba(143, 255, 210, 0.42), transparent);
+  }
+
+  .mist-divider::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: min(70vw, 760px);
+    height: 150px;
+    transform: translate(-50%, -50%);
+    background:
+      radial-gradient(ellipse at center, rgba(143, 255, 210, 0.2), transparent 64%),
+      radial-gradient(ellipse at 35% 50%, rgba(143, 255, 210, 0.1), transparent 58%);
+    filter: blur(28px);
+    opacity: 0.78;
+    pointer-events: none;
+  }
+
+  .intro,
+  .system,
+  .security-note,
+  .philosophy,
+  .cta {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 118px 0;
+  }
+
+  .intro {
+    text-align: center;
+  }
+
+  .founder-signature {
+    width: min(150px, 34vw);
+    margin: 40px 6vw 0 auto;
+    position: relative;
+    opacity: 0.94;
+  }
+
+  .founder-signature img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transform: rotate(-1deg);
+    filter: drop-shadow(0 0 10px rgba(143, 255, 210, 0.1));
+  }
+
+
+  h2 {
+    margin: 0;
+    font-size: clamp(42px, 6.2vw, 84px);
+    line-height: 0.94;
+    letter-spacing: -0.065em;
+  }
+
+  .products {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 112px 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  .product-card {
+    min-height: 390px;
+    padding: 26px;
+    border-radius: 34px;
+    background: linear-gradient(180deg, rgba(247, 247, 247, 0.86), rgba(241, 241, 241, 0.92));
+    border: 1px solid rgba(232, 232, 232, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, opacity 0.5s ease, filter 0.5s ease;
+  }
+
+  .product-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(143, 255, 210, 0.9);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.07), 0 0 42px rgba(143, 255, 210, 0.18);
+  }
+
+  .product-card h3 {
+    font-size: 32px;
+    line-height: 0.95;
+    letter-spacing: -0.055em;
+    margin: 20px 0 10px;
+  }
+
+  .product-card p {
+    margin: 0 0 18px;
+    font-size: 16px;
+    line-height: 1.2;
+  }
+
+  .product-card a {
+    font-weight: 650;
+  }
+
+  .product-type {
+    margin-top: 30px !important;
+    margin-bottom: 0 !important;
+    color: #555 !important;
+  }
+
+  .shape {
+    width: 88px;
+    height: 88px;
+    margin-bottom: auto;
+    background: white;
+    animation: float 4.4s ease-in-out infinite;
+  }
+
+  .circle,
+  .ring {
+    border-radius: 999px;
+  }
+
+  .ring {
+    background: transparent;
+    border: 18px solid white;
+  }
+
+  .pill {
+    width: 120px;
+    border-radius: 999px;
+  }
+
+  .triangle {
+    clip-path: polygon(50% 0, 100% 100%, 0 100%);
+  }
+
+  .shield {
+    clip-path: polygon(50% 0, 88% 16%, 80% 74%, 50% 100%, 20% 74%, 12% 16%);
+  }
+
+  .system span {
+    display: inline-flex;
+    margin-top: 24px;
+    padding: 8px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(143, 255, 210, 0.75);
+    box-shadow: 0 0 24px rgba(143, 255, 210, 0.16);
+    font-size: 13px;
+  }
+
+  .cta {
+    text-align: center;
+    padding-bottom: 148px;
+  }
+
+  .reveal-zone {
+    opacity: 0.2;
+    transform: translateY(38px) scale(0.985);
+    filter: blur(7px);
+    transition:
+      opacity 0.85s ease,
+      transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+      filter 0.85s ease;
+    transition-delay: var(--delay, 0ms);
+    will-change: opacity, transform, filter;
+  }
+
+  .reveal-zone.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-8px);
+    }
+  }
+
+  @keyframes ambientDrift {
+    from {
+      transform: translate3d(-4vw, -2vh, 0) scale(0.92);
+    }
+    to {
+      transform: translate3d(-18vw, -10vh, 0) scale(1.12);
+    }
+  }
+
+  @keyframes signatureDraw {
+    to {
+      stroke-dashoffset: 0;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    :global(html) {
+      scroll-behavior: auto;
+    }
+
+    .cursor-mist,
+    .ambient-mist {
+      display: none;
+    }
+
+    .reveal-zone,
+    .shape {
+      opacity: 1;
+      transform: none;
+      filter: none;
+      animation: none;
+      transition: none;
+    }
+
+    .button,
+    .contact,
+    .product-card {
+      transition: none;
+    }
+  }
+
+  @media (max-width: 900px) {
+    .products {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 760px) {
+    .site-shell {
+      padding: 14px;
+    }
+
+    nav {
+      display: none;
+    }
+
+    .hero {
+      min-height: 64vh;
+      padding-top: 54px;
+    }
+
+    .intro,
+    .system,
+    .security-note,
+    .philosophy,
+    .cta {
+      padding: 82px 0;
+    }
+
+    .products {
+      grid-template-columns: 1fr;
+      padding: 82px 0;
+    }
+
+    .product-card {
+      min-height: 320px;
+    }
+
+    .founder-signature {
+      width: min(132px, 44vw);
+      margin-left: 0;
+    }
+  }
+</style>
