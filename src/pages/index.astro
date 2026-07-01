@@ -25,7 +25,7 @@ const products = [
     link: "View Care",
   },
   {
-	name: "AEVUM Shield.",
+    name: "AEVUM Shield.",
     type: "Mac lockdown utility",
     shape: "shield",
     text:
@@ -53,6 +53,12 @@ const products = [
 const basePath = import.meta.env.BASE_URL.endsWith("/")
   ? import.meta.env.BASE_URL
   : `${import.meta.env.BASE_URL}/`;
+const brandAssetSrc = (path: string) => `${basePath}assets/brand/${path}`;
+const siteIconSrc = brandAssetSrc("favicon/aevumeu-site-icon-blue.png");
+const navbarLogoSrc = brandAssetSrc("logos/aevumeu-logo-navbar-white.png");
+const heroBrandingSrc = brandAssetSrc("hero/aevumeu-hero-branding.webp");
+const bgGlowSrc = brandAssetSrc("backgrounds/aevumeu-bg-glow.webp");
+const bgCircuitSrc = brandAssetSrc("backgrounds/aevumeu-bg-circuit.webp");
 const signatureSrc = `${basePath}brand/signature.png`;
 ---
 
@@ -60,7 +66,10 @@ const signatureSrc = `${basePath}brand/signature.png`;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-    <title>AevumEU — Aevum Novum. Software for a smarter age.</title>
+    <title>AevumEU — Software for a smarter age.</title>
+    <link rel="icon" type="image/png" sizes="512x512" href={siteIconSrc} />
+    <link rel="apple-touch-icon" href={siteIconSrc} />
+    <meta name="theme-color" content="#020711" />
     <meta
       name="description"
       content="AevumEU builds products, Mac care tools, and the internal operating system behind them."
@@ -72,13 +81,19 @@ const signatureSrc = `${basePath}brand/signature.png`;
     <div class="cursor-mist" aria-hidden="true"></div>
     <div class="ambient-mist" aria-hidden="true"></div>
 
-    <main class="site-shell">
+    <main
+      class="site-shell"
+      style={`--brand-bg-glow: url(${bgGlowSrc}); --brand-bg-circuit: url(${bgCircuitSrc});`}
+    >
       <header class="nav">
         <a class="brand" href="#top" aria-label="AevumEU home">
-          <span class="mark" aria-hidden="true">
-            <span></span><span></span><span></span>
-          </span>
-          AevumEU
+          <img
+            src={navbarLogoSrc}
+            alt="AevumEU"
+            width="208"
+            height="250"
+            decoding="async"
+          />
         </a>
 
         <nav aria-label="Primary navigation">
@@ -87,16 +102,27 @@ const signatureSrc = `${basePath}brand/signature.png`;
           <a href="#philosophy">Philosophy</a>
         </nav>
 
-        <a class="contact" href="mailto:hello@aevum.eu">Contact</a>
+        <a class="contact" href="mailto:aevum-eu@proton.me">Contact</a>
       </header>
 
       <section id="top" class="hero reveal-zone is-visible">
-        
-        <h1>AevumEU</h1>
-        <p class="eyebrow"> A software Company.</p>
-        <p class="lead">Aevum Novum.</p> 
-        <p class="sublead">Software for a smarter age.</p>
-        <a href="#products" class="button">View products</a>
+        <div class="hero-branding" aria-hidden="true">
+          <img
+            src={heroBrandingSrc}
+            alt=""
+            width="1032"
+            height="856"
+            decoding="async"
+          />
+        </div>
+
+        <div class="hero-copy">
+          <h1>AevumEU</h1>
+          <p class="eyebrow">A software company.</p>
+          <p class="lead">Aevum Nortum.</p>
+          <p class="sublead">Software for a smarter age.</p>
+          <a href="#products" class="button">View products</a>
+        </div>
       </section>
 
       <div class="mist-divider" aria-hidden="true"></div>
@@ -204,8 +230,8 @@ const signatureSrc = `${basePath}brand/signature.png`;
           });
         },
         {
-          threshold: 0.28,
-          rootMargin: "-8% 0px -12% 0px",
+          threshold: 0.16,
+          rootMargin: "-4% 0px -6% 0px",
         }
       );
 
@@ -220,16 +246,18 @@ const signatureSrc = `${basePath}brand/signature.png`;
   }
 
   :global(html) {
+    background: #020711;
     scroll-behavior: smooth;
   }
 
   :global(body) {
     margin: 0;
     font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    background:
-      radial-gradient(circle at 50% 4%, rgba(143, 255, 210, 0.12), transparent 30rem),
-      #fff;
-    color: #050505;
+    background: #020711;
+    color: #f7fbff;
+    overflow-x: hidden;
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
   }
 
   .cursor-mist {
@@ -244,37 +272,66 @@ const signatureSrc = `${basePath}brand/signature.png`;
     transform: translate3d(calc(var(--x) - 50%), calc(var(--y) - 50%), 0);
     pointer-events: none;
     opacity: 0;
-    mix-blend-mode: multiply;
+    mix-blend-mode: screen;
     background:
-      radial-gradient(circle at 45% 45%, rgba(143, 255, 210, 0.24), transparent 36%),
-      radial-gradient(circle at 58% 56%, rgba(143, 255, 210, 0.12), transparent 48%);
-    filter: blur(34px);
+      radial-gradient(circle at 45% 45%, rgba(25, 136, 255, 0.2), transparent 38%),
+      radial-gradient(circle at 58% 56%, rgba(136, 229, 255, 0.12), transparent 50%);
+    filter: blur(36px);
     transition: opacity 0.45s ease;
   }
 
   .cursor-mist.is-active {
-    opacity: 0.72;
+    opacity: 0.7;
   }
 
   .ambient-mist {
     position: fixed;
-    inset: auto -15vw 5vh auto;
+    inset: auto -15vw 0 auto;
     z-index: 1;
     width: 44vw;
     height: 44vw;
     pointer-events: none;
-    background: radial-gradient(circle, rgba(143, 255, 210, 0.11), transparent 62%);
+    background: radial-gradient(circle, rgba(0, 116, 255, 0.18), transparent 62%);
     filter: blur(44px);
-    opacity: 0.65;
-    animation: ambientDrift 14s ease-in-out infinite alternate;
+    opacity: 0.56;
+    animation: ambientDrift 18s ease-in-out infinite alternate;
   }
 
   .site-shell {
     position: relative;
     z-index: 3;
+    isolation: isolate;
     min-height: 100vh;
     padding: 22px;
     overflow: hidden;
+    background:
+      radial-gradient(circle at 18% 14%, rgba(0, 118, 255, 0.2), transparent 26rem),
+      radial-gradient(circle at 82% 4%, rgba(102, 194, 255, 0.12), transparent 24rem),
+      linear-gradient(180deg, #020711 0%, #04101d 42%, #020711 100%);
+  }
+
+  .site-shell::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+    pointer-events: none;
+    background-image: radial-gradient(circle, rgba(204, 230, 255, 0.2) 0 1px, transparent 1.5px);
+    background-size: 56px 56px;
+    opacity: 0.12;
+    animation: particleDrift 32s linear infinite;
+  }
+
+  .site-shell::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: -3;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.035), transparent),
+      radial-gradient(circle at 50% 110%, rgba(0, 61, 145, 0.42), transparent 36rem);
+    opacity: 0.72;
   }
 
   .nav {
@@ -287,11 +344,11 @@ const signatureSrc = `${basePath}brand/signature.png`;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border: 1px solid rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(139, 190, 255, 0.18);
     border-radius: 999px;
-    background: rgba(255, 255, 255, 0.84);
+    background: rgba(2, 8, 18, 0.78);
     backdrop-filter: blur(18px);
-    box-shadow: 0 20px 70px rgba(0, 0, 0, 0.035);
+    box-shadow: 0 18px 70px rgba(0, 0, 0, 0.32), inset 0 1px 0 rgba(255, 255, 255, 0.06);
   }
 
   .brand,
@@ -299,39 +356,36 @@ const signatureSrc = `${basePath}brand/signature.png`;
   nav a,
   .button,
   .product-card a {
-    color: #050505;
+    color: #f7fbff;
     text-decoration: none;
   }
 
   .brand {
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-weight: 700;
-    letter-spacing: -0.03em;
+    justify-content: center;
+    min-width: 74px;
+    position: relative;
   }
 
-  .mark {
-    display: flex;
-    gap: 3px;
-    align-items: center;
-  }
-
-  .mark span {
-    width: 9px;
-    height: 9px;
-    background: #050505;
-    display: block;
-  }
-
-  .mark span:nth-child(2) {
+  .brand::before {
+    content: "";
+    position: absolute;
+    inset: -12px -18px;
+    z-index: -1;
     border-radius: 999px;
+    background: radial-gradient(ellipse at center, rgba(0, 118, 255, 0.18), transparent 68%);
+    filter: blur(12px);
+    opacity: 0.58;
+    animation: logoBreath 8s ease-in-out infinite;
   }
 
-  .mark span:nth-child(3) {
-    clip-path: polygon(50% 0, 100% 100%, 0 100%);
-    background: #8fffd2;
-    filter: drop-shadow(0 0 8px rgba(143, 255, 210, 0.8));
+  .brand img {
+    display: block;
+    width: auto;
+    height: 58px;
+    filter: drop-shadow(0 0 11px rgba(25, 136, 255, 0.34));
+    animation: navLogoBreath 8s ease-in-out infinite;
   }
 
   nav {
@@ -341,56 +395,150 @@ const signatureSrc = `${basePath}brand/signature.png`;
   }
 
   nav a {
-    color: #777;
+    color: #aab6c8;
     transition: color 0.2s ease;
   }
 
   nav a:hover {
-    color: #050505;
+    color: #ffffff;
   }
 
   .contact {
     padding: 9px 14px;
     border-radius: 999px;
-    background: #050505;
-    color: white;
+    background: rgba(0, 104, 255, 0.16);
+    border: 1px solid rgba(78, 158, 255, 0.42);
+    color: #f7fbff;
     font-size: 14px;
     transition: transform 0.2s ease, box-shadow 0.2s ease;
   }
 
   .contact:hover {
     transform: translateY(-1px);
-    box-shadow: 0 0 0 4px rgba(143, 255, 210, 0.22);
+    box-shadow: 0 0 0 4px rgba(48, 139, 255, 0.18);
   }
 
   .hero {
-    min-height: 72vh;
+    position: relative;
+    max-width: 1120px;
+    margin: 0 auto;
     display: grid;
-    place-items: center;
-    text-align: center;
-    padding: 76px 0 64px;
+    grid-template-columns: minmax(360px, 1fr) minmax(280px, 0.74fr);
+    gap: 70px;
+    align-items: center;
+    padding: 50px 0 96px;
+  }
+
+  .hero::after {
+    content: "";
+    position: absolute;
+    left: 3%;
+    top: 12%;
+    z-index: -1;
+    width: min(540px, 58vw);
+    aspect-ratio: 1.55;
+    border-radius: 50%;
+    background:
+      radial-gradient(circle at 44% 48%, rgba(65, 178, 255, 0.16), transparent 34%),
+      radial-gradient(circle at 60% 58%, rgba(0, 86, 255, 0.12), transparent 54%);
+    filter: blur(34px);
+    opacity: 0.75;
+    animation: heroAura 12s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    left: -7%;
+    bottom: 3%;
+    z-index: -1;
+    width: min(720px, 76vw);
+    aspect-ratio: 2.24;
+    background-image: var(--brand-bg-glow);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(14px) saturate(1.18);
+    opacity: 0.2;
+    animation: blueBreath 10s ease-in-out infinite;
+  }
+
+  .hero-branding {
+    position: relative;
+    isolation: isolate;
+    width: min(100%, 570px);
+    justify-self: center;
+    overflow: visible;
+    perspective: 900px;
+  }
+
+  .hero-branding::before {
+    content: "";
+    position: absolute;
+    inset: 5% -1% 6%;
+    z-index: -1;
+    border-radius: 42%;
+    background:
+      radial-gradient(circle at 50% 38%, rgba(0, 118, 255, 0.42), transparent 34%),
+      radial-gradient(ellipse at 52% 72%, rgba(0, 168, 255, 0.24), transparent 56%);
+    filter: blur(38px);
+    animation: blueBreath 8s ease-in-out infinite;
+  }
+
+  .hero-branding::after {
+    content: "";
+    position: absolute;
+    inset: -8% -12%;
+    z-index: 2;
+    background: linear-gradient(110deg, transparent 39%, rgba(255, 255, 255, 0.28), transparent 51%);
+    -webkit-mask-image: radial-gradient(ellipse at center, #000 45%, transparent 72%);
+    mask-image: radial-gradient(ellipse at center, #000 45%, transparent 72%);
+    mix-blend-mode: screen;
+    opacity: 0;
+    transform: translateX(-130%);
+    animation: lightSweep 8s ease-in-out infinite;
+    pointer-events: none;
+  }
+
+  .hero-branding img {
+    display: block;
+    width: 100%;
+    height: auto;
+    position: relative;
+    z-index: 1;
+    mix-blend-mode: screen;
+    filter:
+      drop-shadow(0 0 14px rgba(42, 168, 255, 0.3))
+      drop-shadow(0 0 34px rgba(0, 78, 255, 0.22));
+    animation: heroBreath 9s ease-in-out infinite;
+  }
+
+  .hero-copy {
+    max-width: 430px;
   }
 
   .hero h1 {
     margin: 0;
-    font-size: clamp(76px, 14vw, 190px);
-    line-height: 0.86;
-    letter-spacing: -0.095em;
+    font-size: 64px;
+    line-height: 0.96;
+    letter-spacing: 0;
+    text-shadow: 0 0 40px rgba(78, 170, 255, 0.1);
   }
 
   .lead {
+    margin: 26px 0 0;
+    font-size: 30px;
+    line-height: 1.12;
+    color: #f7fbff;
+  }
 
-  margin: 28px 0 0;
-
-  font-size: clamp(17px, 2vw, 21px);
-
-}
-
-.sublead {
-  margin: 2px 0 0;
-  font-size: clamp(16px, 2vw, 18px);
-  color: #8c8c8c;
-}
+  .sublead {
+    margin: 8px 0 0;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #aab6c8;
+  }
 
   .hero p,
   .intro p,
@@ -399,30 +547,36 @@ const signatureSrc = `${basePath}brand/signature.png`;
   .philosophy p,
   .cta p,
   .product-card p {
-    color: #8c8c8c;
+    color: #aab6c8;
   }
 
   .eyebrow,
   .product-type {
-    color: #050505 !important;
+    color: #74b8ff !important;
     font-size: 12px;
-    letter-spacing: 0.18em;
+    letter-spacing: 0;
     text-transform: uppercase;
+    font-weight: 700;
   }
 
   .button {
     display: inline-flex;
+    align-items: center;
+    justify-content: center;
     margin-top: 24px;
     padding: 13px 20px;
     border-radius: 999px;
-    background: #050505;
-    color: white;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    background: linear-gradient(180deg, rgba(0, 118, 255, 0.92), rgba(0, 74, 190, 0.92));
+    border: 1px solid rgba(145, 199, 255, 0.38);
+    color: #ffffff;
+    box-shadow: 0 14px 42px rgba(0, 92, 255, 0.22);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   }
 
   .button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 0 0 4px rgba(143, 255, 210, 0.22), 0 18px 50px rgba(0, 0, 0, 0.11);
+    border-color: rgba(193, 223, 255, 0.68);
+    box-shadow: 0 0 0 4px rgba(48, 139, 255, 0.18), 0 18px 52px rgba(0, 92, 255, 0.26);
   }
 
   .mist-divider {
@@ -430,7 +584,7 @@ const signatureSrc = `${basePath}brand/signature.png`;
     max-width: 960px;
     height: 1px;
     margin: 16px auto;
-    background: linear-gradient(90deg, transparent, rgba(143, 255, 210, 0.42), transparent);
+    background: linear-gradient(90deg, transparent, rgba(67, 151, 255, 0.42), transparent);
   }
 
   .mist-divider::before {
@@ -442,8 +596,8 @@ const signatureSrc = `${basePath}brand/signature.png`;
     height: 150px;
     transform: translate(-50%, -50%);
     background:
-      radial-gradient(ellipse at center, rgba(143, 255, 210, 0.2), transparent 64%),
-      radial-gradient(ellipse at 35% 50%, rgba(143, 255, 210, 0.1), transparent 58%);
+      radial-gradient(ellipse at center, rgba(0, 118, 255, 0.2), transparent 64%),
+      radial-gradient(ellipse at 35% 50%, rgba(136, 229, 255, 0.1), transparent 58%);
     filter: blur(28px);
     opacity: 0.78;
     pointer-events: none;
@@ -463,11 +617,45 @@ const signatureSrc = `${basePath}brand/signature.png`;
     text-align: center;
   }
 
+  .intro h2,
+  .system h2,
+  .security-note h2,
+  .philosophy h2,
+  .cta h2 {
+    color: #f7fbff;
+  }
+
   .founder-signature {
-    width: min(150px, 34vw);
-    margin: 40px 6vw 0 auto;
+    width: min(210px, 48vw);
+    margin: 46px 4vw 0 auto;
     position: relative;
-    opacity: 0.94;
+    opacity: 0.96;
+    padding: 18px 20px;
+    border: 1px solid rgba(139, 190, 255, 0.12);
+    border-radius: 8px;
+    background: linear-gradient(135deg, rgba(9, 24, 42, 0.52), rgba(2, 8, 18, 0.24));
+    box-shadow: 0 22px 70px rgba(0, 0, 0, 0.24);
+  }
+
+  .founder-signature::before {
+    content: "";
+    position: absolute;
+    inset: -18px;
+    z-index: -1;
+    border-radius: 18px;
+    background: radial-gradient(ellipse at center, rgba(0, 118, 255, 0.18), transparent 72%);
+    filter: blur(18px);
+    animation: logoBreath 10s ease-in-out infinite;
+  }
+
+  .founder-signature::after {
+    content: "";
+    position: absolute;
+    right: 18px;
+    bottom: 12px;
+    width: 64px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(116, 184, 255, 0.72), transparent);
   }
 
   .founder-signature img {
@@ -475,18 +663,23 @@ const signatureSrc = `${basePath}brand/signature.png`;
     width: 100%;
     height: auto;
     transform: rotate(-1deg);
-    filter: drop-shadow(0 0 10px rgba(143, 255, 210, 0.1));
+    filter:
+      invert(1)
+      brightness(1.55)
+      drop-shadow(0 0 10px rgba(116, 184, 255, 0.28))
+      drop-shadow(0 0 24px rgba(0, 118, 255, 0.18));
   }
 
 
   h2 {
     margin: 0;
-    font-size: clamp(42px, 6.2vw, 84px);
+    font-size: 58px;
     line-height: 0.94;
-    letter-spacing: -0.065em;
+    letter-spacing: 0;
   }
 
   .products {
+    position: relative;
     max-width: 1120px;
     margin: 0 auto;
     padding: 112px 0;
@@ -495,29 +688,73 @@ const signatureSrc = `${basePath}brand/signature.png`;
     gap: 18px;
   }
 
+  .products::before,
+  .security-note::before,
+  .system::before {
+    content: "";
+    position: absolute;
+    inset: 36px -7% 24px;
+    z-index: -1;
+    background-image: var(--brand-bg-circuit);
+    background-position: center;
+    background-repeat: repeat-x;
+    background-size: 680px auto;
+    opacity: 0.055;
+    filter: saturate(1.15) blur(0.4px);
+    mix-blend-mode: screen;
+    -webkit-mask-image:
+      radial-gradient(ellipse at center, #000 0 32%, transparent 76%),
+      linear-gradient(90deg, transparent, #000 18% 82%, transparent);
+    mask-image:
+      radial-gradient(ellipse at center, #000 0 32%, transparent 76%),
+      linear-gradient(90deg, transparent, #000 18% 82%, transparent);
+    pointer-events: none;
+  }
+
   .product-card {
+    position: relative;
+    overflow: hidden;
     min-height: 390px;
     padding: 26px;
-    border-radius: 34px;
-    background: linear-gradient(180deg, rgba(247, 247, 247, 0.86), rgba(241, 241, 241, 0.92));
-    border: 1px solid rgba(232, 232, 232, 0.9);
+    border-radius: 8px;
+    background:
+      linear-gradient(180deg, rgba(11, 27, 47, 0.88), rgba(5, 15, 28, 0.94)),
+      radial-gradient(circle at 24% 12%, rgba(0, 118, 255, 0.16), transparent 16rem);
+    border: 1px solid rgba(139, 190, 255, 0.16);
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease, opacity 0.5s ease, filter 0.5s ease;
   }
 
+  .product-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 40%, rgba(255, 255, 255, 0.06), transparent 58%);
+    opacity: 0;
+    transform: translateX(-80%);
+    transition: opacity 0.25s ease, transform 0.55s ease;
+    pointer-events: none;
+  }
+
   .product-card:hover {
     transform: translateY(-6px);
-    border-color: rgba(143, 255, 210, 0.9);
-    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.07), 0 0 42px rgba(143, 255, 210, 0.18);
+    border-color: rgba(91, 170, 255, 0.55);
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3), 0 0 42px rgba(0, 118, 255, 0.18);
+  }
+
+  .product-card:hover::before {
+    opacity: 1;
+    transform: translateX(70%);
   }
 
   .product-card h3 {
     font-size: 32px;
     line-height: 0.95;
-    letter-spacing: -0.055em;
+    letter-spacing: 0;
     margin: 20px 0 10px;
+    color: #ffffff;
   }
 
   .product-card p {
@@ -528,20 +765,22 @@ const signatureSrc = `${basePath}brand/signature.png`;
 
   .product-card a {
     font-weight: 650;
+    color: #9bcaff;
   }
 
   .product-type {
     margin-top: 30px !important;
     margin-bottom: 0 !important;
-    color: #555 !important;
+    color: #7abaff !important;
   }
 
   .shape {
     width: 88px;
     height: 88px;
     margin-bottom: auto;
-    background: white;
-    animation: float 4.4s ease-in-out infinite;
+    background: linear-gradient(135deg, #f7fbff, #8ac7ff 52%, #005eff);
+    box-shadow: 0 0 34px rgba(0, 118, 255, 0.24);
+    animation: float 5.4s ease-in-out infinite;
   }
 
   .circle,
@@ -551,7 +790,7 @@ const signatureSrc = `${basePath}brand/signature.png`;
 
   .ring {
     background: transparent;
-    border: 18px solid white;
+    border: 18px solid #dff0ff;
   }
 
   .pill {
@@ -572,9 +811,15 @@ const signatureSrc = `${basePath}brand/signature.png`;
     margin-top: 24px;
     padding: 8px 12px;
     border-radius: 999px;
-    border: 1px solid rgba(143, 255, 210, 0.75);
-    box-shadow: 0 0 24px rgba(143, 255, 210, 0.16);
+    border: 1px solid rgba(91, 170, 255, 0.58);
+    color: #dcebff;
+    box-shadow: 0 0 24px rgba(0, 118, 255, 0.16);
     font-size: 13px;
+  }
+
+  .security-note,
+  .system {
+    position: relative;
   }
 
   .cta {
@@ -583,21 +828,18 @@ const signatureSrc = `${basePath}brand/signature.png`;
   }
 
   .reveal-zone {
-    opacity: 0.2;
-    transform: translateY(38px) scale(0.985);
-    filter: blur(7px);
+    opacity: 0.58;
+    transform: translateY(20px) scale(0.996);
     transition:
-      opacity 0.85s ease,
-      transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-      filter 0.85s ease;
+      opacity 0.65s ease,
+      transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
     transition-delay: var(--delay, 0ms);
-    will-change: opacity, transform, filter;
+    will-change: opacity, transform;
   }
 
   .reveal-zone.is-visible {
     opacity: 1;
     transform: translateY(0) scale(1);
-    filter: blur(0);
   }
 
   @keyframes float {
@@ -606,6 +848,15 @@ const signatureSrc = `${basePath}brand/signature.png`;
     }
     50% {
       transform: translateY(-8px);
+    }
+  }
+
+  @keyframes particleDrift {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: 112px 56px;
     }
   }
 
@@ -618,9 +869,76 @@ const signatureSrc = `${basePath}brand/signature.png`;
     }
   }
 
-  @keyframes signatureDraw {
-    to {
-      stroke-dashoffset: 0;
+  @keyframes heroAura {
+    0%, 100% {
+      opacity: 0.45;
+      transform: translate3d(-2%, 1%, 0) scale(0.96);
+    }
+    50% {
+      opacity: 0.82;
+      transform: translate3d(2%, -1%, 0) scale(1.05);
+    }
+  }
+
+  @keyframes logoBreath {
+    0%, 100% {
+      opacity: 0.42;
+      transform: scale(0.96);
+    }
+    50% {
+      opacity: 0.72;
+      transform: scale(1.08);
+    }
+  }
+
+  @keyframes navLogoBreath {
+    0%, 100% {
+      filter: drop-shadow(0 0 8px rgba(25, 136, 255, 0.24));
+      transform: translateY(0);
+    }
+    50% {
+      filter: drop-shadow(0 0 16px rgba(73, 171, 255, 0.42));
+      transform: translateY(-1px);
+    }
+  }
+
+  @keyframes blueBreath {
+    0%, 100% {
+      opacity: 0.16;
+      transform: scale(0.98);
+    }
+    50% {
+      opacity: 0.42;
+      transform: scale(1.055);
+    }
+  }
+
+  @keyframes heroBreath {
+    0%, 100% {
+      filter:
+        drop-shadow(0 0 13px rgba(42, 168, 255, 0.24))
+        drop-shadow(0 0 30px rgba(0, 78, 255, 0.18));
+      transform: translate3d(0, 0, 0) rotateX(0deg) scale(1);
+    }
+    50% {
+      filter:
+        drop-shadow(0 0 19px rgba(73, 182, 255, 0.38))
+        drop-shadow(0 0 44px rgba(0, 98, 255, 0.28));
+      transform: translate3d(0, -5px, 0) rotateX(1deg) scale(1.018);
+    }
+  }
+
+  @keyframes lightSweep {
+    0%, 72%, 100% {
+      opacity: 0;
+      transform: translateX(-130%);
+    }
+    78% {
+      opacity: 0.5;
+    }
+    90% {
+      opacity: 0;
+      transform: translateX(130%);
     }
   }
 
@@ -634,6 +952,21 @@ const signatureSrc = `${basePath}brand/signature.png`;
       display: none;
     }
 
+    .site-shell::before,
+    .hero::before,
+    .hero::after,
+    .brand::before,
+    .brand img,
+    .hero-branding::before,
+    .hero-branding::after,
+    .hero-branding img {
+      animation: none;
+    }
+
+    .hero-branding::after {
+      opacity: 0;
+    }
+
     .reveal-zone,
     .shape {
       opacity: 1;
@@ -645,12 +978,24 @@ const signatureSrc = `${basePath}brand/signature.png`;
 
     .button,
     .contact,
-    .product-card {
+    .product-card,
+    .product-card::before {
       transition: none;
     }
   }
 
   @media (max-width: 900px) {
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 30px;
+      text-align: center;
+    }
+
+    .hero-copy {
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
     .products {
       grid-template-columns: repeat(2, 1fr);
     }
@@ -665,9 +1010,37 @@ const signatureSrc = `${basePath}brand/signature.png`;
       display: none;
     }
 
+    .nav {
+      top: 14px;
+    }
+
+    .brand {
+      min-width: 62px;
+    }
+
+    .brand img {
+      height: 48px;
+    }
+
     .hero {
-      min-height: 64vh;
-      padding-top: 54px;
+      min-height: auto;
+      padding: 58px 0 74px;
+    }
+
+    .hero-branding {
+      width: min(90vw, 390px);
+    }
+
+    .hero h1 {
+      font-size: 42px;
+    }
+
+    .lead {
+      font-size: 24px;
+    }
+
+    h2 {
+      font-size: 38px;
     }
 
     .intro,
@@ -690,6 +1063,22 @@ const signatureSrc = `${basePath}brand/signature.png`;
     .founder-signature {
       width: min(132px, 44vw);
       margin-left: 0;
+      padding: 14px 16px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .contact {
+      padding: 8px 11px;
+      font-size: 13px;
+    }
+
+    .hero h1 {
+      font-size: 36px;
+    }
+
+    .lead {
+      font-size: 22px;
     }
   }
 </style>
